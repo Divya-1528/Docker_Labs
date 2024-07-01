@@ -1,0 +1,13 @@
+2. How containers communicate using their default bridge network with the help of their IP addressess
+
+steps to be followed:-
+1. Create two containers
+ # docker container run -d --name nginx1 -p 8080:80 nginx
+ # docker container run -d --name nginx2 -p 8081:80 nginx
+2. Execute the container in interactive mode
+ # docker exec -it nginx1 /bin/bash
+3. install pin command
+ # apt-get update
+ # apt-get install iputils-ping
+4. ping with the ip of 2nd container
+ # ping <container_2_ip> 
