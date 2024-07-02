@@ -1,0 +1,10 @@
+4. Upload/Push Docker Image to Docker Registry
+steps to be followed:-
+1. login to the dockerhub
+# docker login
+2. tag your Image
+# docker tag mysql:latest shibbey28/sql:0.0.1
+3. Check your docker images
+# docker images 
+4. push to docker hub
+# docker push shibbey28/sql:0.0.1
