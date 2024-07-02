@@ -1,0 +1,10 @@
+3. If Containers uses same network they can communicate using container name rather than IP.
+steps to be followed:-
+ 
+1. Create a custom network 
+# docker network create my_network
+2. Create two docker containers
+# docker container run -d --name nginx1 --network mynetwork -p 8080:80 nginx
+# docker container run -d --name nginx2 --network mynetwork -p 8080:80 nginx
+3. exec with the help of ping command
+# docker exec -it nginx1 ping nginx2
