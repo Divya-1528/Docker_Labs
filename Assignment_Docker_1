@@ -1,0 +1,25 @@
+7. Create dockerfie, further download python image from docker repository . In that write a simple python program and run python inside the container.Tag and push to Dockerhub. Atlast remove image and execute it from Dockerhub with docker pull
+
+steps to be followed:-
+
+1. Download the pyhton image
+# docker container run -d -it -p 8080:80 --image python_image pyhton
+2. create Dockerfile
+   FROM pyhton:latest
+   LABEL maintainer:"divya14@gmail.com"
+   LABEL name:"Divya Mittal"
+   ADD program.py /
+   CMD ["pyhton","python.py"]
+3. Make program.py file
+4. build the docker image
+# docker build -t shibbey28/python_image:0.0.1 .
+5. login to dockerhub
+#docker login
+6. push in the dockerhub
+# docker push shibbey28/python_image:0.0.1
+7. Remove the docker
+#docker rm <container_ID>
+8. pull the repository from dockerhub
+#docker pull shibbey28/pyhton_image:0.0.1
+9. run the docker
+#docker run <container_id>
