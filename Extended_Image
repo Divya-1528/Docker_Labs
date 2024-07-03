@@ -1,0 +1,14 @@
+6. Extended Official Docker Image
+steps to be followed:-
+1.Run the nginx container first
+# docker container run -d -p 8080:80 --name nginx nginx
+2. Make dockerfile and also make a dummy index.html file
+             FROM nginx:latest
+             LABEL maintainer:"divya28@1528"
+             LABEL version:"0.0.3"
+             WORKDIR /usr/share/nginx/html
+             COPY index.html index.html
+
+ 3. copy index.html to dummy index.html
+ 4. Build the docker image
+ # docker build -t shibbey28/extended-nginx:0.0.1
