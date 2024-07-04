@@ -1,0 +1,52 @@
+15. Docker Distributed Voting App
+-> uses Pyhton,Node.js,.NET with Redis for messaging and postgres for storage
+->It need 1 mount volume , 2 network , 5 stack service
+-> 2 overlay network -> frontend and backend
+
+CREATE TWO OVERLAY network
+#docker network create -d overlay frontend_net
+#docker network create -d overlay backend_net
+
+
+FOR VOTE
+1. Publish on 5000, container Port 80
+2. Image: dockersamples/examplevotingapp vote
+3. Name: vote
+4. Publish 4 replicas
+5. publish on frontend overlay network
+
+#docker service create --network frontend_net -p 5000:80 --replicas 4 --name vote dockersamples/examplevotingapp_vote
+
+
+FOR REDIS:ALPINE Image
+1. Image: redis:alpine
+2. publish on 4 replicas
+3. publish on frontend overlay network
+
+#docker service create --network frontend_net --name alpine redis:alpine
+
+WORKER
+1. Image: dockersamples/examplevotingapp_worker
+2. A .NET worker which consumes votes and stores them
+3. Publish 4 replicas
+4. Publish on frontend and backend overlay network
+
+#docker service create --replicas 4 --network frontend_net --network backend_net --name worker dockersamples/exampkevotingapp_worker
+
+
+DB SERVICE
+1. Image: postgress:15-alpine
+2. Mount volume and mountn to /var/lib/postgresql/data
+3. Publish on backend network
+4. Publish 1 replicas
+5. Environmental POSTGRES_PASSWORD=123
+
+#docker service create --network backend_net --replicas 1 --mount type=volume,source=db-data,target= /var/lib/postgresql/data --name db -e POSTGRES_PASSWORD=123 postgres:15 alpine
+
+RESULT SERVICE
+1. Image: dockersamples/examplevotingapp_results
+2. Publish on backend net
+3. Publish on port 5001, container port 80
+4. Publish 1 replicas
+
+#docker service create --network backend_net --replicas 1 -p 5001:80 --name result dockersamples/examplevotingapp_result
