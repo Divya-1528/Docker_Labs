@@ -1,0 +1,51 @@
+12. Execute wordpress and Mysql using docker compose
+steps to be followed:-
+1. Make docker-compose.yml
+
+   version:'3'
+   services:
+        db: 
+           image: mysql:5.7
+           container_name: mysql_container
+           restart: always
+           environment:
+                MYSQL_ROOT_PASSWORD : mypass
+                MYSQL_DATABASE: wordpres
+                MYSQL_USER: wordpresuser
+                MYSQL_PASSWORD: wordpres
+           volumes:
+              - mysql_data:/var/lib/mysql
+           networks:
+              - wordpres_network
+           ports:
+              -'3306:3306'
+
+         wordpres:
+              depends_on:
+                 -db
+
+              image: wordpres:latest
+              container_name: mysql_container
+              restart: always
+              environment:
+                 WORDPRES_DB_HOST : db:3306
+                 WORDPRES_DB_USER: wordpresuser
+                 WORDPRES_DB_PASSWORD: wordpres
+         volumes:
+              - wordpres_data:/var/www/html
+         networks:
+              - wordpres_network
+         ports:      
+              -"8080:80"
+   volumes:
+     mysql_data:
+     wordpres_data:
+   networks:
+     wordpres-network:
+         driver: bridge
+
+now run the command
+1. Running in foreground
+#docker compose up      
+2. or if running in background
+#docker compose up -d                  
