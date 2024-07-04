@@ -1,0 +1,16 @@
+14. Create network in Docker Swarm 
+steps to be followed:-
+1. Create an overlay network
+#docker network create -d overlay <ntw_name> 
+2. Create service on user defined overlay network
+# docker service create --name postgres --network my_network -e POSTGRES_PASSWORD=123 postgres
+
+3. create web-service to access the DB and same network
+#docker service create --name drupal --network my-network -p 8080:80 drupal
+
+4. docker container ls
+5. Exec the container in interactive mode
+#docker exec -it <id> bash
+6. Inside the docker create a db
+# createdb -U postgres postgres_db --encoding=UNICODE
+#psql -c "CREATE EXTENSION pg-trgm" postgres_db postgres
