@@ -1,0 +1,10 @@
+9. Persistant data with Bind Mount
+(Start Nginx with Bind Mount + RUN the container)
+steps to be followed :-
+
+1.Making directory of nginx file
+#mkdir nginx_file
+2.Run the container
+#docker container run -d --mount type=bind,source= /root/dir,target= /apps -p 8080:80 --name nginx:latest 
+
+~NOTE: If you change/add/delete in the host machine, in containers in apps directory it get changes too
