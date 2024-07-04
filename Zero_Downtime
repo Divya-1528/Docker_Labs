@@ -1,0 +1,13 @@
+18. Zero Downtime Service Upgrade
+steps to be followed:-
+1. Create the Service
+#docker Service create -p 8080:80 --name web-server nginx:1.14.2
+
+2. Scale the service
+#docker service scale web-server=10
+
+3. Update the service
+#docker service update --image web-server nginx:1.15.12
+
+4. Switch the port
+#docker service update --publish -rm 8080 --publish -add 8090:80 web-server
