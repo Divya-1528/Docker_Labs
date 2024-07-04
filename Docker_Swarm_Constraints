@@ -1,0 +1,20 @@
+20. Docker Swarm Constraints
+
+steps to be followed:-
+1. For Manager
+#docker service create --name postgresdb --constraint node.role==manager postgres
+
+2. For Visualizer
+#docker run -it -d -p 8080:80 -v/var/run/docker.sock:/var/run/docker.sock dockersamples/visualizer
+
+3. For Worker
+#docker service create --name webserver --constraint node.role==worker --replicas=5 nginx
+
+4. Adding label
+#docker node update --label-add=region=east-1-d <id of master node>
+
+5. create a service
+#docker service create --name postgres --constraint node.labels.region==east-1-d postgres
+
+6. remove Constraint
+#docker service update --constraint-rm=node.labels.region==east-1.d --constraint-add node.role==worker postgres
