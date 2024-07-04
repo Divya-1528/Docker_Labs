@@ -1,0 +1,8 @@
+11. Start the nginx container, bind mount it and with that edit the index.html file in local machine , you will came to know the change in the running container
+ steps to be followed:-
+ 1. make the directory
+ #mkdir test_nginx
+ 2. Run the docker
+ #docker run -d -p 8080:80 --mount type=bind,source= /root/test_ngninx,target= /usr/share/nginx/html --name nginx_image nginx
+ 3. edit your html file
+ #gedit index.html
