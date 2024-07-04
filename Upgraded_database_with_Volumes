@@ -1,0 +1,33 @@
+10. Database Upgraded with volumes in container.
+ Here you need a mysql container with some versions and give some volume names ,verify status. Further go to database , create some data , stop and remove the container and start with new Mysql with existing volume and verify the data.
+
+ 1. run the container
+ #docker container run -d -e MYSQL_ALLOW_EMPTY_PASSWORD=true --mount source=mysql-db,target= /var/lib/mysql --name mysql_assignment mysql:8.2
+
+ 2. Exec in interactive mode
+ #docker exec -it mysql_assignment /bin/bash
+
+ 3. enter inside the container
+ #mysql -u root
+ #mysql
+ #create database university;
+ #use university;
+ #create table students(
+    roll_no int(10),
+    first_name varchar(20),
+    email varchar(20),
+ );
+
+4.Remove the container
+#docker rm <cont. id>
+
+5. Run the same container with different name
+#docker container run -d -e MYSQL_ALLOW_EMPTY_PASSWORD=true --mount source=mysql-db,target= /var/lib/mysql --name mysql_test
+
+6. execute it in interactive mode
+#docker exec -it mysql_test /bin/bash
+
+7. enter inside the container
+#mysql -u root
+#show databases -> here you will be shown university.
+
