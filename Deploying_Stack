@@ -1,0 +1,20 @@
+16. Deploying Stack using Docker Swarm
+
+points to be noted->
+1. Building own image
+2. sample web_app project
+3. Build image from Dockerfile
+app.py  docker-compose.yml  Dockerfile   requirements.txt
+
+
+steps to be followed:-
+1. Build the image
+#docker build --tag web_app .
+
+2. tag the image
+#docker tag shibbey28/web_app:1.0 web_app:latest
+3. Push the image
+#docker push shibbey28/web_app:1.0
+
+4. Deploy the service using Docker Swarm
+#docker stack deploy -c docker-compose.yml web_app
