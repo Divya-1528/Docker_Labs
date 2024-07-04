@@ -1,0 +1,6 @@
+13. Create first service with Docker Swarm
+steps to be followed:-
+1. Create a docker image
+#docker service create alpine www.google.com
+2. if you want to sace up
+#docker service update <id> --replicas 5
