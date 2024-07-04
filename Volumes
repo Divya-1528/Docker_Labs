@@ -1,0 +1,9 @@
+8. Persistant data with volumes
+(pull MYYSQL+RUN+Create Volume with name)
+
+1.Pull the image
+
+#docker pull MYYSQL
+2. Mount the Volume and run
+
+#docker container run -d -e MYSQL_ALLOW_EMPTY_PASSWORD=true --mount source=mysql_db,target=/var/lib/mysql --name mysql_image mysql:8.2
